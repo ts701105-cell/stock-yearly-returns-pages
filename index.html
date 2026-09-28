@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>股票年度報酬率｜歷史價格試算</title>
+<meta name="description" content="輸入股票代號和投入日期，查看投入後每個曆年的歷史報酬率。">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123960'/%3E%3Cpath d='M12 44 25 33l10 6 17-20M42 19h10v10' fill='none' stroke='%237fd3c1' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{font-family:Arial,"Noto Sans TC",sans-serif;color:#102238;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}.top{height:72px;display:flex;align-items:center;gap:12px;padding:0 max(32px,calc((100vw - 1120px)/2));border-bottom:1px solid #d7e2eb;background:#fff;font-size:17px}.mark{display:grid;place-items:center;width:34px;height:34px;background:#123960;color:#fff;border-radius:9px;font-size:23px}.top-note{margin-left:auto;color:#78899a;font-size:14px}.workspace{max-width:1120px;margin:auto;padding:54px 32px 84px}.intro{margin-bottom:30px}.eyebrow{font-size:13px;color:#38769b;font-weight:700;letter-spacing:.16em;margin:0 0 14px}.intro h1{font-size:clamp(32px,4.4vw,52px);letter-spacing:-.055em;line-height:1.18;margin:0;font-weight:750}.intro>p:last-child{color:#60758b;margin:16px 0 0;font-size:16px}.form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:18px;padding:26px;background:#fff;border:1px solid #dbe5ed;border-radius:18px;box-shadow:0 15px 45px #1539570d}.field{display:flex;flex-direction:column;gap:9px;min-width:0}.field label{font-size:15px;font-weight:700}.field input{width:100%;height:48px;font-size:16px;border:1px solid #d7e2eb;border-radius:9px;background:#fdfefe;padding:0 13px;color:#102238}.field input:focus-visible,.submit:focus-visible{outline:3px solid #8abbd4;outline-offset:2px}.field small{font-size:13px;color:#718598;min-height:18px}.submit{height:48px;margin-bottom:27px;border:0;background:#123960;color:#fff;border-radius:9px;padding:0 20px;font-size:15px;font-weight:700;white-space:nowrap;cursor:pointer}.submit:disabled{opacity:.6;cursor:wait}.submit span{margin-left:8px;font-size:19px;font-weight:400}.error{margin-top:20px;border:1px solid #e9b9c1;background:#fff0f2;color:#a22e43;border-radius:12px;padding:16px 18px}.empty{margin-top:25px;min-height:190px;border:1px dashed #ccd9e4;border-radius:16px;display:grid;place-items:center;color:#8395a6;background:#fbfcfd}.results{margin-top:35px}.result-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}.result-head h2{font-size:30px;letter-spacing:-.04em;margin:0 0 9px}.tag{display:inline-block;vertical-align:middle;background:#eaf0f6;color:#4b6880;padding:5px 9px;border-radius:6px;margin-left:11px;font-size:13px;letter-spacing:0}.period{font-size:14px;color:#6c8094;margin:0}.total{min-width:224px;background:#e7f1f8;border:1px solid #d0e4f1;border-radius:12px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}.total span{font-size:13px;color:#536f85}.total strong{font-size:26px;letter-spacing:-.04em}.pos{color:#0b866d}.neg{color:#c24855}.table-wrap{overflow-x:auto;background:#fff;border:1px solid #dbe5ed;border-radius:16px;box-shadow:0 12px 32px #1539570a}table{border-collapse:collapse;width:100%;min-width:720px}th,td{text-align:left;padding:16px 18px;border-bottom:1px solid #e9eff4;font-size:15px}th{background:#f0f5f9;color:#547086;font-size:13px;font-weight:700}td:last-child strong{font-size:17px}tr:last-child td{border-bottom:0}.year{font-weight:700;font-size:17px}.year span{display:block;color:#90a1af;font-size:12px;font-weight:400;margin-top:3px}.method{font-size:13px;line-height:1.7;color:#718598;margin:18px 2px 0;max-width:960px}.hidden{display:none!important}@media(max-width:800px){.form{grid-template-columns:1fr 1fr}.submit{grid-column:1/-1;margin:0}.result-head{align-items:stretch}.total{min-width:180px}}@media(max-width:620px){.top{height:62px;padding:0 20px}.top-note{display:none}.workspace{padding:38px 20px 70px}.intro h1{font-size:35px}.form{grid-template-columns:1fr;padding:20px}.submit{grid-column:auto}.field small{min-height:auto}.result-head{display:block}.total{margin-top:20px}.period{line-height:1.55}}
+</style>
+</head>
+<body>
+<header class="top"><span class="mark">↗</span><b>股票年度報酬率</b><span class="top-note">歷史價格試算</span></header>
+<main class="workspace">
+<section class="intro"><p class="eyebrow">STOCK RETURN CALCULATOR</p><h1>看看每一年，投資走了多遠。</h1><p>輸入股票代號及投入日期，查看投入後每個曆年的報酬率。</p></section>
+<form class="form" id="form"><div class="field"><label for="symbol">股票代號</label><input id="symbol" value="2330" placeholder="例如 2330 或 AAPL" autocomplete="off" required><small>台股可直接輸入；上櫃股票可加 .TWO</small></div><div class="field"><label for="date">投入日期</label><input id="date" type="date" value="2020-01-02" required><small>非交易日會從下一個交易日開始計算</small></div><button class="submit" id="submit" type="submit">計算報酬率 <span aria-hidden="true">↗</span></button></form>
+<div class="error hidden" id="error" role="alert"></div>
+<div class="empty" id="empty">輸入上方資料後，這裡會顯示逐年報酬。</div>
+<section class="results hidden" id="results" aria-live="polite"><div class="result-head"><div><p class="eyebrow">ANNUAL PERFORMANCE</p><h2><span id="name"></span><span class="tag" id="ticker"></span></h2><p class="period" id="period"></p></div><div class="total"><span>投入至今累計報酬</span><strong id="total"></strong></div></div><div class="table-wrap"><table><thead><tr><th>年度</th><th>計算期間</th><th>期初調整價</th><th>期末調整價</th><th>年度報酬率</th></tr></thead><tbody id="rows"></tbody></table></div><p class="method">計算方式：以調整後收盤價計算，年度報酬率＝該年期末價 ÷ 前一年度期末價 − 1。投入當年使用投入日後首個交易日作為期初；今年計至最新交易日。調整後價格通常反映拆股與現金股利，但不含交易費、稅、匯率及股利再投入差異。資料來源：Yahoo Finance，僅供歷史試算。</p></section>
+</main>
+<script>
+const api='https://stock-returns-data.ts701105.chatgpt.site/api/returns';
+const $=id=>document.getElementById(id);
+const dateText=s=>s.replaceAll('-','/');
+const pct=n=>`${n>=0?'+':''}${n.toFixed(2)}%`;
+const price=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2}).format(n);
+const cell=(row,value,className)=>{const td=document.createElement('td');if(className)td.className=className;td.textContent=value;row.append(td);return td};
+$('date').max=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Taipei'});
+$('form').addEventListener('submit',async event=>{
+  event.preventDefault();$('error').classList.add('hidden');$('results').classList.add('hidden');$('empty').classList.add('hidden');$('submit').disabled=true;$('submit').textContent='查詢中…';
+  try{
+    const symbol=$('symbol').value.trim();const date=$('date').value;
+    const response=await fetch(`${api}?symbol=${encodeURIComponent(symbol)}&date=${encodeURIComponent(date)}`);
+    const data=await response.json();if(!response.ok)throw new Error(data.error||'查詢失敗，請稍後再試。');
+    $('name').textContent=data.name||data.symbol;$('ticker').textContent=data.symbol;
+    $('period').textContent=`投入日 ${dateText(data.investedOn)} · 首個交易日 ${dateText(data.firstTradingDay)} · 最新資料 ${dateText(data.latestDate)}`;
+    $('total').textContent=pct(data.totalReturnPct);$('total').className=data.totalReturnPct<0?'neg':'pos';
+    $('rows').replaceChildren();
+    for(const item of data.rows){const tr=document.createElement('tr');const year=cell(tr,item.year,'year');const status=document.createElement('span');status.textContent=item.partial?(item.year===Number(data.latestDate.slice(0,4))?'年初至今':'投入當年'):'完整年度';year.append(status);cell(tr,`${dateText(item.from)} — ${dateText(item.to)}`);cell(tr,price(item.startPrice));cell(tr,price(item.endPrice));const end=cell(tr,'');const strong=document.createElement('strong');strong.className=item.returnPct<0?'neg':'pos';strong.textContent=pct(item.returnPct);end.append(strong);$('rows').append(tr)}
+    $('results').classList.remove('hidden');
+  }catch(error){$('error').textContent=error instanceof Error?error.message:'查詢失敗，請稍後再試。';$('error').classList.remove('hidden')}
+  finally{$('submit').disabled=false;$('submit').innerHTML='計算報酬率 <span aria-hidden="true">↗</span>'}
+});
+</script>
+</body>
+</html>
